@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Controle de Senhas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-around;
+      padding: 50px;
+      background-color: #f0f0f0;
+    }
+
+    .section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 40%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .comum {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .preferencial {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .chamar {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    #senha-atual {
+      font-size: 22px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .fila {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Área do Usuário -->
+  <div class="section">
+    <h2>Solicitar Senha</h2>
+    <button class="preferencial" onclick="gerarSenha('P')">Preferencial</button>
+    <button class="comum" onclick="gerarSenha('C')">Comum</button>
+    <div class="fila">
+      <strong>Senhas geradas:</strong>
+      <div id="filaPreferencial">Preferencial: []</div>
+      <div id="filaComum">Comum: []</div>
+    </div>
+  </div>
+
+  <!-- Área do Atendente -->
+  <div class="section">
+    <h2>Atendente</h2>
+    <button class="chamar" onclick="chamarProxima()">Chamar Próxima Senha</button>
+    <div id="senha-atual">Nenhuma senha chamada ainda.</div>
+  </div>
+
+  <script>
+    let filaPreferencial = [];
+    let filaComum = [];
+    let contadorPreferencial = 0;
+    let contadorComum = 0;
+
+    function gerarSenha(tipo) {
+      if (tipo === 'P') {
+        contadorPreferencial++;
+        const senha = `P${String(contadorPreferencial).padStart(3, '0')}`;
+        filaPreferencial.push(senha);
+      } else {
+        contadorComum++;
+        const senha = `C${String(contadorComum).padStart(3, '0')}`;
+        filaComum.push(senha);
+      }
+      atualizarFilas();
+    }
+
+    function chamarProxima() {
+      let senhaAtual = '';
+      if (filaPreferencial.length > 0) {
+        senhaAtual = filaPreferencial.shift();
+      } else if (filaComum.length > 0) {
+        senhaAtual = filaComum.shift();
+      } else {
+        senhaAtual = 'Nenhuma senha na fila.';
+      }
+
+      document.getElementById('senha-atual').textContent = `Senha chamada: ${senhaAtual}`;
+      atualizarFilas();
+    }
+
+    function atualizarFilas() {
+      document.getElementById('filaPreferencial').textContent = `Preferencial: [${filaPreferencial.join(', ')}]`;
+      document.getElementById('filaComum').textContent = `Comum: [${filaComum.join(', ')}]`;
+    }
+  </script>
+
+</body>
+</html>

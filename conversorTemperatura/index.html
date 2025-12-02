@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="styles.css" rel="stylesheet">
+    -->
+    <title>CONVERSOR DE TEMPERATURA</title>
+</head>
+<body>
+    <h1>Conversor de Grau Célsius para Fahrenheit</h1>
+    <label for="valor"> Digite a tempreratura em graus célcius:</label>
+    <input type="number" id="valor" placeholder="Exemplo 60" requered="valor" class="input-group">
+    <!-- <div>
+        <input type="radio" id="celsius" name="escala" value="1" checked>
+        <label for="celsius">Célsius para Fahrenheit</label>
+        <input type="radio" id="fahrenheit" name="escala" value="2" >
+        <label for="fahrenheit">Fahrenheit para Célsius</label>
+    </div> -->
+    <button onclick="conversor()">Converter para Fahrenheit</button>
+    
+    <div id="resultado"> O valor em Farenheit aparecerá aqui</div>
+    <div id="grau-infor">1°C = 33,8°F</div>
+</body>
+<script src="script.js"></script>
+</html>
